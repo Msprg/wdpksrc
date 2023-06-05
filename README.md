@@ -24,6 +24,9 @@ On Ubuntu 18.04:
 .. code::
 
     apt-get install libxml2 openssl
+    #Symlink relevant mksapkg & make it executable
+    cd wdpksrc
+    ln -s mksapkg-OS5 mksapkg && sudo chmod +x mksapkg
 
 ## Docker
 
