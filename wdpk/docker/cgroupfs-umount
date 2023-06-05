@@ -13,11 +13,11 @@ if [ ! -d /sys/fs/cgroup ]; then
 fi
 
 for sys in /sys/fs/cgroup/*; do
-	if [ -d $sys ]; then
-		umount $sys
+	if [ -d "$sys" ]; then
+		umount "$sys"
 	fi
-	if [ -d $sys ]; then
-		rmdir $sys || true
+	if [ -d "$sys" ]; then
+		rmdir "$sys" || true
 	fi
 done
 

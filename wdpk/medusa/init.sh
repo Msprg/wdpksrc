@@ -11,10 +11,10 @@ LOG=/tmp/${APP}.log
 echo "INIT linking files from path: ${APPDIR}" >> $LOG
 
 # create link to binary 
-cp ${APPDIR}/bootscript /opt/etc/init.d/S91Medusa
+cp "${APPDIR}"/bootscript /opt/etc/init.d/S91Medusa
 
 # create directory for the webpage
 WEBDIR="/var/www/${APP}/"
 mkdir -p $WEBDIR
-ln -sf ${APPDIR}/web/* $WEBDIR
+ln -sf "${APPDIR}"/web/* $WEBDIR
 

@@ -11,12 +11,12 @@ APKG_MODULE="cops"
 APKG_PATH="${path_dst}/${APKG_MODULE}"
 
 # install all package scripts to the proper location
-cp -rf $path_src $path_dst
+cp -rf "$path_src" "$path_dst"
 
 # download the latest Calibre COPS release from github
 # unfortunately, the builtin wget is not able to check certificates
 RELEASE_PATH="$(wget --no-check-certificate "https://github.com/seblucas/cops/releases/latest" -q -O- | grep 'releases/download' | cut -d'"' -f2)"
-RELEASE="$(echo ${RELEASE_PATH} | cut -d'/' -f7)"
+RELEASE="$(echo "${RELEASE_PATH}" | cut -d'/' -f7)"
 wget --no-check-certificate "https://github.com${RELEASE_PATH}" -P "${APKG_PATH}"
 
 result=$?

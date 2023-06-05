@@ -101,8 +101,8 @@ function docker_setup
 
     for m in "${drivers[@]}"; do
       echo "Loading $m"
-      if ! insmod $m ; then
-        echo failed to load $m
+      if ! insmod "$m" ; then
+        echo failed to load "$m"
       fi
       #sleep 1
     done
@@ -124,7 +124,7 @@ function docker_stop
     containers="$(${DOCKER} ps -q)"
     if [ ! -z "${containers}" ]; then
         echo "Stopping containers ${containers}"
-        ${DOCKER} stop ${containers}
+        ${DOCKER} stop "${containers}"
     fi
 
     # Stop docker
@@ -176,7 +176,7 @@ function set_docker_cgroup
         return 1
     fi
 
-    if [ ${mem_total_kb} -gt ${ONE_G_KB} ]; then
+    if [ "${mem_total_kb}" -gt ${ONE_G_KB} ]; then
         mem_quota=$((mem_total_kb/2))
     else
         mem_quota=$((mem_total_kb/3))
@@ -224,7 +224,7 @@ case $1 in
         docker_mounts=$(cat /proc/self/mounts | grep docker)
         if [ -z "${docker_pid}" ]; then
             echo "Docker is not running!"
-            if [ "${docker_mounts}"]; then
+            if [ "${docker_mounts}" ] ; then
                 echo "Found mounts: ${docker_mounts}"
             fi
             exit 1

@@ -54,10 +54,10 @@ daemon_status()
 wait_for_status()
 {
     counter=$2
-    while [ ${counter} -gt 0 ]; do
+    while [ "${counter}" -gt 0 ]; do
                 daemon_status
-        [ $? -eq $1 ] && break
-                counter=`expr $counter - 1`
+        [ $? -eq "$1" ] && break
+                counter=`expr "$counter" - 1`
         sleep 1
     done
 }
@@ -89,7 +89,7 @@ case $1 in
         fi
         ;;
     log)
-        echo ${LOG_FILE}
+        echo "${LOG_FILE}"
         ;;
     *)
         exit 1

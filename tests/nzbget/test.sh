@@ -1,13 +1,13 @@
 #!/bin/bash
 
-source wdpk/$PACKAGE/env
+source wdpk/"$PACKAGE"/env
 echo "$PACKAGE port is $PORT"
 
-HOSTNAME=$(ssh -G $TARGET | awk '/^hostname / { print $2 }')
+HOSTNAME=$(ssh -G "$TARGET" | awk '/^hostname / { print $2 }')
 echo "Ping $HOSTNAME"
 
 serverReachable() {
-	return $(nc -z $HOSTNAME $PORT)
+	return $(nc -z "$HOSTNAME" "$PORT")
 }
 
 count=0

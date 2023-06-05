@@ -40,11 +40,11 @@ curl -L -s ${URL} | tar zx -C "${APKG_PATH}" 2>&1 >> $log
 [[ ! $? -eq 0 ]] && exit 2
 
 # strip the version from the app dir
-mv "${APKG_PATH}"/${MAINDIR} "${APKG_PATH}"/${APKG_NAME}
+mv "${APKG_PATH}"/${MAINDIR} "${APKG_PATH}"/"${APKG_NAME}"
 
 # create syncthing home dir
-mkdir -p ${ST_HOME}
+mkdir -p "${ST_HOME}"
 # finds first user in the admin group
 ADMIN_USER=$(cat /etc/group | grep administrators | head -n 1 | awk -F: '{ print $4}')
-chown "${ADMIN_USER}" ${ST_HOME}
-chmod u+w ${ST_HOME}
+chown "${ADMIN_USER}" "${ST_HOME}"
+chmod u+w "${ST_HOME}"

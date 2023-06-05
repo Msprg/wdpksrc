@@ -1,13 +1,13 @@
 #!/bin/bash
 
-source wdpk/$PACKAGE/env
+source wdpk/"$PACKAGE"/env
 
 serverReachable() {
-	return $(nc -z $TARGET $PORT)
+	return $(nc -z "$TARGET" "$PORT")
 }
 
 webuiReachable() {
-	return $(nc -z $TARGET $WEBGUI_PORT)
+	return $(nc -z "$TARGET" "$WEBGUI_PORT")
 }
 
 count=0

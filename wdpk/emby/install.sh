@@ -8,10 +8,10 @@ path_dst=$2
 log=/tmp/debug_apkg
 
 APKG_MODULE="emby"
-APKG_PATH=$(readlink -f ${path_dst}/${APKG_MODULE})
+APKG_PATH=$(readlink -f "${path_dst}"/${APKG_MODULE})
 
 # install all package scripts to the proper location
-cp -rf $path_src $path_dst
+cp -rf "$path_src" "$path_dst"
 
 # download the latest Emby release from github
 # unfortunately, the builtin wget is not able to check certificates
@@ -23,7 +23,7 @@ fi
 
 RELEASE_PATH="$(wget --no-check-certificate "https://github.com/MediaBrowser/Emby/releases/latest" -q -O- \
                | grep 'releases/download' | grep "server-deb_.*_$PLF" | cut -d'"' -f2)"
-RELEASE="$(echo ${RELEASE_PATH} | cut -d'/' -f7)"
+RELEASE="$(echo "${RELEASE_PATH}" | cut -d'/' -f7)"
 wget --no-check-certificate "https://github.com${RELEASE_PATH}" -P "${APKG_PATH}"
 
 result=$?
@@ -34,10 +34,10 @@ fi
 
 # unpack the .deb archive
 UNPACK_DIR=${APKG_PATH}/unpack
-mkdir -p ${UNPACK_DIR}
-cd ${UNPACK_DIR}
+mkdir -p "${UNPACK_DIR}"
+cd "${UNPACK_DIR}"
 ls -l >> $log
-ar x ${APKG_PATH}/${RELEASE}
+ar x "${APKG_PATH}"/"${RELEASE}"
 
 result=$?
 echo "ar unpack $result" >> $log
@@ -51,12 +51,12 @@ echo "ar unpack $result" >> $log
 tar xf control.tar.gz
 
 # install the libs and bins and adjust APP_DIR to APKG_PATH
-cp opt/emby-server/* ${APKG_PATH} -R
-cd ${APKG_PATH}
+cp opt/emby-server/* "${APKG_PATH}" -R
+cd "${APKG_PATH}"
 sed -i "s#APP_DIR=.*#APP_DIR=${APKG_PATH}#" bin/emby-server
 
 # remove the archive
-rm -rf ${UNPACK_DIR}
+rm -rf "${UNPACK_DIR}"
 rm "${APKG_PATH}/${RELEASE}"
 
 # setup config to Public dir

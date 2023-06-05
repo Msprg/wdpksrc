@@ -1,9 +1,9 @@
 #!/bin/bash
 
-source wdpk/$PACKAGE/env
+source wdpk/"$PACKAGE"/env
 
 serverReachable() {
-	return $(nc -z $TARGET $PORT)
+	return $(nc -z "$TARGET" "$PORT")
 }
 
 count=0

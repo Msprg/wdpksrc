@@ -16,11 +16,11 @@ rm ${APKG_CONFIG_BACKUP}
 rm -rf ${DATA_DIR_BACKUP}
 
 # store new backup
-mv ${APKG_CONFIG} ${APKG_CONFIG_BACKUP}
-mv ${DATA_DIR} ${DATA_DIR_BACKUP}
+mv "${APKG_CONFIG}" ${APKG_CONFIG_BACKUP}
+mv "${DATA_DIR}" ${DATA_DIR_BACKUP}
 
 # clean up
-rm -rf ${APKG_PATH}
+rm -rf "${APKG_PATH}"
 
 # remove bin
 

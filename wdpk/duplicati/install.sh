@@ -12,7 +12,7 @@ APKG_PATH="${NASPROG}/${APKG_MODULE}"
 DUPLICATI_HOME="${NASPROG}/duplicati_conf"
 
 # install all package scripts to the proper location
-cp -rf $path_src $NASPROG
+cp -rf "$path_src" "$NASPROG"
 
 cd "${APKG_PATH}"
 
@@ -42,13 +42,13 @@ wget https://updates.duplicati.com/beta/duplicati-2.0.6.3_beta_2021-06-17.spk --
 mv duplicati*.spk duplicati.tar
 tar xf duplicati.tar 
 PACKAGE_DIR="${APKG_PATH}/package"
-mkdir -p ${PACKAGE_DIR}
+mkdir -p "${PACKAGE_DIR}"
 tar xf package.tgz -C "${PACKAGE_DIR}" >> $log
 rm package.tgz
 
 # create config directory
 if [ ! -d "${DUPLICATI_HOME}" ]; then
-    mkdir -p ${DUPLICATI_HOME}
+    mkdir -p "${DUPLICATI_HOME}"
 fi
 
 echo "Addon ${APKG_MODULE} (install.sh) done" >> $log

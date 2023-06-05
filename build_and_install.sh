@@ -44,7 +44,7 @@ if [ -z "$MODEL" ]; then
 fi
 echo "Select model $MODEL"
 
-BINARY=$(find packages/$PACKAGE -name "*${PACKAGE}_*_${MODEL}.bin" | sort | tail -n1)
+BINARY=$(find packages/"$PACKAGE" -name "*${PACKAGE}_*_${MODEL}.bin" | sort | tail -n1)
 echo "Created $BINARY"
 
 TARGET="$2"
@@ -53,24 +53,24 @@ TARGET="$2"
 
 echo
 echo "Upload the app $BINARY"
-scp $BINARY $TARGET:/shares/Volume_1/.systemfile/upload/app.bin
+scp "$BINARY" "$TARGET":/shares/Volume_1/.systemfile/upload/app.bin
 
 #cssh='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 cssh=ssh
 
 echo
 echo "Install the app"
-ALREADY_INSTALLED=$($cssh $TARGET "del_apkg whatever | grep ${PACKAGE}")
+ALREADY_INSTALLED=$($cssh "$TARGET" "del_apkg whatever | grep ${PACKAGE}")
 if [ -n "${ALREADY_INSTALLED}" ]; then
-	$cssh $TARGET "PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin:/usr/local/bin /usr/sbin/upload_apkg -rapp.bin -d -f1 -g1 && echo 'SUCCESS!'"
+	$cssh "$TARGET" "PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin:/usr/local/bin /usr/sbin/upload_apkg -rapp.bin -d -f1 -g1 && echo 'SUCCESS!'"
 else
 	echo "Warning: this usually doesn't work!"
-	$cssh $TARGET "PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin:/usr/local/bin /usr/sbin/upload_apkg -m -papp.bin -t2  && echo 'SUCCESS!'"
+	$cssh "$TARGET" "PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin:/usr/local/bin /usr/sbin/upload_apkg -m -papp.bin -t2  && echo 'SUCCESS!'"
 fi
 
 
 TEST=tests/$PACKAGE/test.sh
-if [ -e $TEST ]; then
+if [ -e "$TEST" ]; then
 	echo
 	echo "Run test hooks"
 	export PACKAGE=$PACKAGE

@@ -17,12 +17,12 @@ for fullmodel in $MODELS; do
   model=${fullmodel%-*}
   name=${fullmodel#*-}
   echo "$model  $name"
-  ../../mksapkg-OS5 -E -s -m $model > /dev/null
-  mv ../${model}*.bin* "${RELEASE_DIR}/${APP_NAME}_${VERSION}_${name}.bin"
+  ../../mksapkg-OS5 -E -s -m "$model" > /dev/null
+  mv ../"${model}"*.bin* "${RELEASE_DIR}/${APP_NAME}_${VERSION}_${name}.bin"
 done
 
 echo "Bundle sources"
 SRC_TAR="${RELEASE_DIR}/${APP_NAME}_${VERSION}_src.tar.gz"
-tar -czf $SRC_TAR .
+tar -czf "$SRC_TAR" .
 
 

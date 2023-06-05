@@ -3,5 +3,5 @@
 
 path=$1
 
-rm -rf $path
+rm -rf "$path"
 rm -rf "/var/www/apps/zerotier/"

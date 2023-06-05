@@ -10,10 +10,10 @@ log=/tmp/couchpotato.log
 echo "INIT linking files from path: $path" >> $log
 
 # create link to binary 
-cp $path/bootscript /opt/etc/init.d/S90CouchPotato
+cp "$path"/bootscript /opt/etc/init.d/S90CouchPotato
 
 # create folder for the webpage
 WEBPATH="/var/www/couchpotato/"
 mkdir -p $WEBPATH
-ln -sf $path/web/* $WEBPATH
+ln -sf "$path"/web/* $WEBPATH
 

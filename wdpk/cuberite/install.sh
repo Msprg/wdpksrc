@@ -16,7 +16,7 @@ SERVER_BIN="${SERVER_DIR}/Cuberite"
 WORLD_DATA="/shares/Volume_1/${APKG_NAME}"
 
 # install all package scripts to the proper location
-cp -r ${INSTALL_DIR} ${NAS_PROG}
+cp -r "${INSTALL_DIR}" "${NAS_PROG}"
 
 echo "install requirements" >> $log
 opkg install patchelf >> $log 2>&1
@@ -28,7 +28,7 @@ if [ ! -e /etc/ssl/cert.pem ]; then
 fi
 
 ORIG_DIR=$(pwd)
-cd ${APKG_PATH}
+cd "${APKG_PATH}"
 
 echo "get the latest stable Cuberite version from the buildserver archive" >> $log
 BUILDS="https://builds.cuberite.org/job/cuberite/job/master/job/linux-x64/job/release/lastSuccessfulBuild/artifact/cuberite"
@@ -60,17 +60,17 @@ rm ${CHECKSUM}
 #sed -i "s|^PKG_DIR=.*|PKG_DIR=${APKG_PATH}|" ${APKG_PATH}/bootscript
 
 echo "patch the server binary" >> $log
-patchelf --set-rpath /opt/lib ${SERVER_BIN}
-patchelf --set-interpreter /opt/lib/ld-linux-x86-64.so.2 ${SERVER_BIN}
+patchelf --set-rpath /opt/lib "${SERVER_BIN}"
+patchelf --set-interpreter /opt/lib/ld-linux-x86-64.so.2 "${SERVER_BIN}"
 
 [[ ! $? -eq 0 ]] && exit 3
 
 # move the server binary out of the world directory
 # the Server directory remains as a reference for those who want to start a fresh world
-mv ${SERVER_BIN} ${APKG_PATH}
+mv "${SERVER_BIN}" "${APKG_PATH}"
 
 # prepare webadmin setup
-cp ${APKG_PATH}/webadmin.ini ${SERVER_DIR}
+cp "${APKG_PATH}"/webadmin.ini "${SERVER_DIR}"
 
 # restore previous worlds
 if [ -d ${WORLD_DATA} ] ; then
@@ -79,7 +79,7 @@ if [ -d ${WORLD_DATA} ] ; then
 else
    echo "Addon ${APKG_NAME} (install.sh) fresh install" >> $log
    # setup a fresh world data dir
-   cp -r ${SERVER_DIR} ${WORLD_DATA}
+   cp -r "${SERVER_DIR}" ${WORLD_DATA}
 fi
 
 echo "Addon ${APKG_NAME} (install.sh) done" >> $log

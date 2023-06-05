@@ -18,7 +18,7 @@ fi
 
 # update profile
 PROFILE=/etc/profile
-[ ! -f $PROFILE ] && cp $APPDIR/profile $PROFILE
+[ ! -f $PROFILE ] && cp "$APPDIR"/profile $PROFILE
 
 # restore home dir
 HOME=/home/root
@@ -27,16 +27,16 @@ if [ ! -L ${HOME} ]
 then
 	echo "Setup persistent home directory"
 	rm -rf ${HOME}
-	mkdir -p ${NEWHOME}
-	ln -sf ${NEWHOME} /home/root
+	mkdir -p "${NEWHOME}"
+	ln -sf "${NEWHOME}" /home/root
 	chown -R root:root ${HOME}
-	chown -R root:root ${NEWHOME}
+	chown -R root:root "${NEWHOME}"
 fi
 
 WEBPATH=/var/www
 CGI_BIN="${WEBPATH}/cgi-bin"
 APP_WEBPATH=${WEBPATH}/apps/entware/
 mkdir -p $APP_WEBPATH
-ln -sf $APPDIR/web/* $APP_WEBPATH
-ln -sf $APPDIR/cgi-bin/entware.py $CGI_BIN/
+ln -sf "$APPDIR"/web/* $APP_WEBPATH
+ln -sf "$APPDIR"/cgi-bin/entware.py $CGI_BIN/
 echo "Created Entware web dir symlink" > $LOG

@@ -49,7 +49,7 @@ DaemonStart() {
 		TMP_DIR="${PACKAGE_TEMP_DIR}" \
 		TEMP="${PACKAGE_TEMP_DIR}" \
 		DUPLICATI_HOME="${NASPROG}/duplicati_conf" \
-		$MONO "${PACKAGE_DIR}/Duplicati.Server.exe" $OPTIONS &
+		$MONO "${PACKAGE_DIR}/Duplicati.Server.exe" "$OPTIONS" &
 		echo $! > "$PID_FILE"		
 
                 # TODO: use a lighttpd conf for WD MyCloud
@@ -83,7 +83,7 @@ DaemonStatus() {
 	if [ -f "$PID_FILE" ]; then
 		PID=$(cat "$PID_FILE")
 		
-		if [ -n "$(ps | grep $PID | grep -vn "grep $PID")" ]; then
+		if [ -n "$(ps | grep "$PID" | grep -vn "grep $PID")" ]; then
 			echo "${PACKAGE_NAME_SIMPLE} is running ..."
 			return 1  # is running
 		else

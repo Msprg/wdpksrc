@@ -50,10 +50,10 @@ cd /sys/fs/cgroup
 
 # get/mount list of enabled cgroup controllers
 for sys in $(awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups); do
-	mkdir -p $sys
-	if ! is_mountpoint /sys/fs/cgroup/$sys; then
-		if ! mount -n -t cgroup -o $sys cgroup $sys; then
-			rmdir $sys || true
+	mkdir -p "$sys"
+	if ! is_mountpoint /sys/fs/cgroup/"$sys"; then
+		if ! mount -n -t cgroup -o "$sys" cgroup "$sys"; then
+			rmdir "$sys" || true
 		fi
 	fi
 done

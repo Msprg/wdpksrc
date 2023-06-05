@@ -15,5 +15,5 @@ ln -sf /shares/Volume_1/Nas_Prog/mono /usr/local/mono
 # create folder for the webpage
 WEBPATH="/var/www/duplicati/"
 mkdir -p $WEBPATH
-ln -sf $path/web/* $WEBPATH
+ln -sf "$path"/web/* $WEBPATH
 

@@ -4,4 +4,4 @@
 export ZEROTIER_HOME=/mnt/HD/HD_a2/.systemfile/zerotier
 mkdir -p "$ZEROTIER_HOME"
 
-$1/bin/zerotier-one -d
+"$1"/bin/zerotier-one -d

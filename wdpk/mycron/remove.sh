@@ -4,7 +4,7 @@ LOG=/tmp/debug_apkg
 
 function log {
     TIME=$(date '+%Y-%m-%d %H:%M:%S')
-    [ -f $LOG ] && echo "$TIME [mycron] [$(basename $0)] $1" >> $LOG
+    [ -f $LOG ] && echo "$TIME [mycron] [$(basename "$0")] $1" >> $LOG
 }
 
 # log entry
@@ -12,12 +12,12 @@ log "Script called: $0 $@"
 
 # recover original crontab
 log "recover original crontab from before install"
-crontab $1/crontab.orig
+crontab "$1"/crontab.orig
 
 # remove app directory
 path=$1
 log "remove app path \"$path\""
-rm -rf $path
+rm -rf "$path"
 
 
 # remove web directory

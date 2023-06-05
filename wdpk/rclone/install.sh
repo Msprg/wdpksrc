@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -f /tmp/debug_apkg] && echo "APKG_DEBUG: $0 $@" >> /tmp/debug_apkg
+[ -f /tmp/debug_apkg ] && echo "APKG_DEBUG: $0 $@" >> /tmp/debug_apkg
 
 path_src=$1
 path_dst=$2
@@ -13,7 +13,7 @@ APKG_CONFIG="${APKG_PATH}/env"
 APKG_BACKUP_DIR="${path_dst}/${APKG_MODULE}_backup/"
 
 # install all package scripts to the proper location
-mv $path_src $path_dst
+mv "$path_src" "$path_dst"
 
 # setup secure http
 if [ ! -e /etc/ssl/cert.pem ]; then
@@ -21,7 +21,7 @@ if [ ! -e /etc/ssl/cert.pem ]; then
     mv cacert.pem /etc/ssl/cert.pem
 fi
 
-cd $path_dst/rclone
+cd "$path_dst"/rclone
 
 # download the latest rclone installer
 if [ "$(uname -m)" = "x86_64" ]; then
@@ -41,8 +41,8 @@ rm rclone-current-linux-${PLF}.zip
 if [ -d "${APKG_BACKUP_DIR}" ]
 then
    echo "Restore backup for ${APKG_MODULE}" >> $log
-   cp ${APKG_BACKUP_DIR}/* ${APKG_PATH}
-   rm -rf ${APKG_BACKUP_DIR}
+   cp "${APKG_BACKUP_DIR}"/* "${APKG_PATH}"
+   rm -rf "${APKG_BACKUP_DIR}"
 else
    echo "No backup found for ${APKG_MODULE} in ${APKG_BACKUP_DIR}"
 fi

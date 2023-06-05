@@ -12,5 +12,5 @@ echo "INIT linking files from path: $path" >> $log
 # create folder for the redirecting webpage
 WEBPATH="/var/www/emby"
 mkdir -p $WEBPATH
-ln -sf $path/web/* $WEBPATH >> $log 2>&1
+ln -sf "$path"/web/* $WEBPATH >> $log 2>&1
 

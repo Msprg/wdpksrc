@@ -4,7 +4,7 @@
 
 path=$1
 
-rm -rf $path
+rm -rf "$path"
 
 # remove bin
 rm -f /opt/etc/init.d/S90CouchPotato

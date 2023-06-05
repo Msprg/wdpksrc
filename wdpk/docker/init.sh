@@ -8,7 +8,7 @@ log=/tmp/debug_apkg
 echo "INIT linking files from path: $path" >> $log
 
 # setup binaries in PATH before the original v1.7 binaries
-ln -s $(readlink -f ${APPDIR})/docker/* /sbin
+ln -s $(readlink -f "${APPDIR}")/docker/* /sbin
 
 # disable default docker by moving the original start script
 [ -L /usr/sbin/docker_daemon.sh ] && mv /usr/sbin/docker_daemon.sh /usr/sbin/docker_daemon.sh.bak
@@ -17,5 +17,5 @@ ln -s $(readlink -f ${APPDIR})/docker/* /sbin
 # create folder for the redirecting webpage
 WEBPATH="/var/www/docker/"
 mkdir -p ${WEBPATH}
-ln -sf ${APPDIR}/web/* $WEBPATH
+ln -sf "${APPDIR}"/web/* $WEBPATH
 
