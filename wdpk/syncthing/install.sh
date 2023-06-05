@@ -33,6 +33,7 @@ VERSION="v1.23.4"
 MAINDIR="syncthing-linux-${PLATFORM}-${VERSION}"
 PACKAGE="${MAINDIR}.tar.gz"
 URL="https://github.com/syncthing/syncthing/releases/download/${VERSION}/${PACKAGE}"
+echo "Pulling ${URL}" >> $log
 
 curl -L -s ${URL} | tar zx -C ${APKG_PATH} 2>&1 >> $log
 
