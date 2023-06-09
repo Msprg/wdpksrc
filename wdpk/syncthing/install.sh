@@ -28,19 +28,16 @@ if [ "${PLATFORM}" = "x86_64" ]; then
 else
 	PLATFORM="arm"
 fi
-VERSION="v1.23.5"
 
-MAINDIR="syncthing-linux-${PLATFORM}-${VERSION}"
-PACKAGE="${MAINDIR}.tar.gz"
-URL="https://github.com/syncthing/syncthing/releases/download/${VERSION}/${PACKAGE}"
+URL=$(curl -s https://api.github.com/repos/syncthing/syncthing/releases/latest | grep -o -E '"browser_download_url":\s?"[^"]*' | grep -o '[^"]*$' | grep linux | grep "${PLATFORM}[^0-9]")
+MAINDIR=$(basename "$URL" .tar.gz)
+
 echo "Pulling ${URL}" >> $log
-
-curl -L -s ${URL} | tar zx -C "${APKG_PATH}" 2>&1 >> $log
-
+curl -L -s "${URL}" | tar zx -C "${APKG_PATH}" 2>&1 >> $log
 [[ ! $? -eq 0 ]] && exit 2
 
 # strip the version from the app dir
-mv "${APKG_PATH}"/${MAINDIR} "${APKG_PATH}"/"${APKG_NAME}"
+mv "${APKG_PATH}"/"${MAINDIR}" "${APKG_PATH}"/"${APKG_NAME}"
 
 # create syncthing home dir
 mkdir -p "${ST_HOME}"
